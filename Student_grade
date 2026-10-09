@@ -1,0 +1,72 @@
+students = []
+
+def add_student():
+    name = input("Enter student name: ")
+    marks = []
+
+    for i in range(3):
+        mark = float(input(f"Enter subject {i + 1} marks: "))
+
+        if mark < 0 or mark > 100:
+            print("Invalid marks! Enter marks between 0 and 100.")
+            return
+
+        marks.append(mark)
+
+    average = sum(marks) / len(marks)
+
+    if average >= 90:
+        grade = "A"
+    elif average >= 75:
+        grade = "B"
+    elif average >= 60:
+        grade = "C"
+    elif average >= 40:
+        grade = "D"
+    else:
+        grade = "F"
+
+    status = "Pass" if all(m >= 35 for m in marks) else "Fail"
+
+    student = {
+        "name": name,
+        "marks": marks,
+        "average": average,
+        "grade": grade,
+        "status": status
+    }
+
+    students.append(student)
+    print("Student added successfully!")
+
+
+def display_students():
+    if not students:
+        print("No student records available.")
+        return
+
+    for student in students:
+        print("\nName:", student["name"])
+        print("Marks:", student["marks"])
+        print("Average:", round(student["average"], 2))
+        print("Grade:", student["grade"])
+        print("Status:", student["status"])
+
+
+while True:
+    print("\n--- Student Grade Management System ---")
+    print("1. Add Student")
+    print("2. Display Students")
+    print("3. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        add_student()
+    elif choice == "2":
+        display_students()
+    elif choice == "3":
+        print("Thank you!")
+        break
+    else:
+        print("Invalid choice. Try again.")
